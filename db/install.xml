@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="admin/tool/massaction/db" VERSION="20140926" COMMENT="XMLDB file for Moodle admin/tool/massaction"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="tool_massaction_blocks" COMMENT="List of Blocks">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The normalized name of the plugin"/>
+        <FIELD NAME="categoryid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The ID of the category this will be applied to."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="i_category" UNIQUE="false" FIELDS="categoryid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="tool_massaction_configs" COMMENT="Configs for mass action objects">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="objectid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID of the massaction object this setting relates to"/>
+        <FIELD NAME="key" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Setting key"/>
+        <FIELD NAME="value" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Value of the config"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="k_objectid_key" TYPE="unique" FIELDS="objectid, key"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="i_objectid" UNIQUE="false" FIELDS="objectid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
